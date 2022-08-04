@@ -1,5 +1,6 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
+const timer = document.getElementById("countdown");
 
 // SET VARIABLES
 let currentQuestion = {};
@@ -78,12 +79,35 @@ let questions = [
 // CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 8;
+
+// TIME
+// function countdownTimer() {
+countdownTimer = () => {
+  // console.log(countdownTimer);
+  let decrementTime = 75;
+  let movementTime = 1200;
+  let timeInterval = setInterval(function () {
+    if (decrementTime > 0) {
+      timer.textContent = "Timer: " + decrementTime + " seconds";
+      decrementTime--;
+    } else if (timeInterval == 1) {
+      timer.textContent = "Timer: " + decrementTime + "second";
+    } else if (!decrementTime) {
+      timer.textContent = "Game Over!";
+      clearInterval(timeInterval);
+      startGame();
+    }
+  }, movementTime);
+};
+
 // START GAME LOOP
 startGame = () => {
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questions];
   console.log(availableQuestions);
+
+  // countdownTimer();
   getNewQuestion();
 };
 
@@ -119,5 +143,7 @@ choices.forEach((choice) => {
     getNewQuestion();
   });
 });
+
 // CALL GAME LOOP
+countdownTimer();
 startGame();
