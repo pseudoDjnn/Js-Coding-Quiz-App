@@ -7,7 +7,7 @@ let acceptedAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
-
+// PARSED OBJECT CONTAINING QUESTIONS
 let questions = [
   {
     question: "HTML stands for?",
@@ -78,7 +78,7 @@ let questions = [
 // CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 8;
-
+// START GAME LOOP
 startGame = () => {
   questionCounter = 0;
   score = 0;
@@ -119,5 +119,5 @@ choices.forEach((choice) => {
     getNewQuestion();
   });
 });
-
+// CALL GAME LOOP
 startGame();
