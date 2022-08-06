@@ -4,10 +4,10 @@ const saveScore = document.getElementById("save-btn");
 const finalAddScore = document.getElementById("final-score");
 const recentScore = localStorage.getItem("recentScore");
 
-const highScore = JSON.parse(localStorage.getItem("High Score")) || [];
+const highScores = JSON.parse(localStorage.getItem("high-score")) || [];
 
 const MAX_SCORE = 8;
-// console.log(highScore);
+// console.log(highScores);
 
 finalAddScore.innerText = recentScore;
 
@@ -17,7 +17,7 @@ username.addEventListener("keyup", () => {
 });
 
 saveHighScore = (event) => {
-  console.log("High Score!");
+  // console.log("Score is saved!");
   event.preventDefault();
 
   let score = {
@@ -27,21 +27,21 @@ saveHighScore = (event) => {
     // Look to see if set scoring provieds gain of new high score and drops the lowest score
     // score: Math.floor(Math.random() * 100),
   };
-  highScore.push(score);
+  highScores.push(score);
 
   // SAME FUNCTION EXPRESSION AS BELOW JUST ANOTHER WAY TO WRITE IT
   // highScore.sort((x,y)=>{
   //   return y.score - x.score;
   // })
 
-  highScore.sort((x, y) => y.score - x.score);
+  highScores.sort((x, y) => y.score - x.score);
 
   // KILL COLLECTION AFTER SPECIFIED AMOUNT
-  highScore.splice(8);
+  highScores.splice(8);
 
   // Save string with JSON
-  localStorage.setItem("highScore", JSON.stringify(highScore));
+  localStorage.setItem("high-score", JSON.stringify(highScores));
   window.location.assign("/");
 
-  // console.log(highScore);
+  console.log(highScores);
 };
