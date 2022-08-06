@@ -1,13 +1,20 @@
 const question = document.getElementById("question");
+console.log(question);
 const choices = Array.from(document.getElementsByClassName("choice-text"));
+const questionCounterText = document.getElementById("question-counter");
+const scoreText = document.getElementById("score");
+
 const timer = document.getElementById("countdown");
 
 // SET VARIABLES
 let currentQuestion = {};
+let time = 75;
 let acceptedAnswers = false;
+// let decrement = 5;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
+
 // PARSED OBJECT CONTAINING QUESTIONS
 let questions = [
   {
@@ -71,7 +78,7 @@ let questions = [
     choice1: "Brendan Eich",
     choice2: "Terry Davis",
     choice3: "Guido van Rossum",
-    choice4: "Jame Gosling",
+    choice4: "James Gosling",
     answer: 1,
   },
 ];
@@ -79,25 +86,36 @@ let questions = [
 // CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 8;
+const DECREMENT_TIME = 5;
 
 // TIME
-// function countdownTimer() {
 countdownTimer = () => {
   // console.log(countdownTimer);
-  let decrementTime = 75;
-  let movementTime = 1200;
+  // let time = 0;
+  let movementTime = 1000;
   let timeInterval = setInterval(function () {
-    if (decrementTime > 0) {
-      timer.textContent = "Timer: " + decrementTime + " seconds";
-      decrementTime--;
-    } else if (timeInterval == 1) {
-      timer.textContent = "Timer: " + decrementTime + "second";
-    } else if (!decrementTime) {
-      timer.textContent = "Game Over!";
+    // if (yesNo === "incorrect") {
+    //   time = time - 5;
+    // }
+    //   // DECREMENT_TIME--;
+    //   time -= timeCounter;
+    //   timer.innerText = time;
+    if (time > 1) {
+      timer.innerText = "Timer: " + time + " seconds";
+      // timer.innerText = `Timer: ${time} seconds`;
+      time--;
+    } else if (timeInterval === 1) {
+      timer.innerText = "Timer: " + time + "second";
+      // timer.innerText = `Timer: ${time} second!`;
+    } else if (!time) {
+      timer.innerText = "Game Over!";
       clearInterval(timeInterval);
-      startGame();
+
+      return window.location.assign("/score.html");
+      // startGame();
     }
   }, movementTime);
+  // console.log(timeInterval);
 };
 
 // START GAME LOOP
@@ -105,7 +123,7 @@ startGame = () => {
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questions];
-  console.log(availableQuestions);
+  // console.log(availableQuestions);
 
   // countdownTimer();
   getNewQuestion();
@@ -113,10 +131,14 @@ startGame = () => {
 
 getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
-    return window.location.assign("/end.html");
+    return window.location.assign("/score.html");
   }
 
   questionCounter++;
+  // questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
+
+  questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`;
+
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
   question.innerText = currentQuestion.question;
@@ -127,23 +149,72 @@ getNewQuestion = () => {
   });
 
   availableQuestions.splice(questionIndex, 1);
-
   acceptedAnswers = true;
 };
 
 choices.forEach((choice) => {
-  choice.addEventListener("click", (x) => {
-    // console.log(x.target);
+  choice.addEventListener("click", (event) => {
+    // console.log(event.target);
     if (!acceptedAnswers) return;
 
     acceptedAnswers = false;
-    const choiceSelection = x.target;
+    const choiceSelection = event.target;
     const answerSelection = choiceSelection.dataset["number"];
-    console.log(answerSelection === currentQuestion.answer);
+    console.log(answerSelection, currentQuestion.answer);
+
+    const yesNo =
+      answerSelection == currentQuestion.answer ? "correct" : "incorrect";
+
+    // console.log(yesNo);
+
+    if (yesNo === "correct") {
+      console.log("YEAH BOI!");
+      increment(CORRECT_BONUS);
+    } else if (yesNo === "incorrect") {
+      console.log("WRONG!");
+      // time = time - 5;
+      decrement(DECREMENT_TIME);
+      // document.appendChild(p)
+      // setTimeout(time, 5000, 5);
+    }
+    // return countdownTimer();
+    // console.log(choiceSelection);
+    // event.value = parseInt(event.remove) - 5;
+
+    // console.log(timer);
+    // countdownTimer();
+    // countdownTimerPenalty();
+
+    choiceSelection.parentElement.classList.add(yesNo);
+
+    setTimeout(() => {
+      choiceSelection.parentElement.classList.remove(yesNo);
+      // clearInterval(countdownTimer);
+      // countdownTimerPenalty();
+      // decrement(DECREMENT_TIME);
+    }, 1000);
     getNewQuestion();
   });
 });
+// clearInterval(countdownTimer);
+
+increment = (num) => {
+  score += num;
+  scoreText.innerText = score;
+};
+
+decrement = (num) => {
+  time -= num;
+  timer.innerText = "Timer: " + -num + " seconds";
+  // time = time - 5;
+
+  // document.getElementById("countdown");
+
+  // decrement--;
+  // decrement -= timeCount;
+};
 
 // CALL GAME LOOP
 countdownTimer();
+// countdownTimerPenalty();
 startGame();

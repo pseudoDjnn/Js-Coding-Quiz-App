@@ -35,3 +35,26 @@
   padding: 1.4rem;
   width: 100%;
 }
+
+.correct {
+  background-color: #72cc50;
+}
+
+.incorrect {
+  background-color: #ff0000;
+}
+
+/* HUD AND SCORE */
+#hud {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hud-prefix {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.hud-main-text {
+  text-align: center;
+}
