@@ -206,12 +206,6 @@ increment = (num) => {
 decrement = (num) => {
   time -= num;
   timer.innerText = "Timer: " + -num + " seconds";
-  // time = time - 5;
-
-  // document.getElementById("countdown");
-
-  // decrement--;
-  // decrement -= timeCount;
 };
 
 // CALL GAME LOOP
