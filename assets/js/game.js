@@ -131,15 +131,16 @@ startGame = () => {
 
 getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+    // SETTING LOCAL STORAGE TO COLLECT INSIDE OF SCORE.JS
     localStorage.setItem("recentScore", score);
     return window.location.assign("/score.html");
   }
 
   questionCounter++;
   // questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
-
+  // TERNARY OPERATOR THAT WORKS
   questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`;
-
+  // FLOOR INTEGER
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
   question.innerText = currentQuestion.question;
@@ -148,7 +149,7 @@ getNewQuestion = () => {
     const number = choice.dataset["number"];
     choice.innerText = currentQuestion["choice" + number];
   });
-
+  // REMOVES ITEM FROM ARRAY WITH SPLICE
   availableQuestions.splice(questionIndex, 1);
   acceptedAnswers = true;
 };
@@ -161,7 +162,7 @@ choices.forEach((choice) => {
     acceptedAnswers = false;
     const choiceSelection = event.target;
     const answerSelection = choiceSelection.dataset["number"];
-    console.log(answerSelection, currentQuestion.answer);
+    // console.log(answerSelection, currentQuestion.answer);
 
     const yesNo =
       answerSelection == currentQuestion.answer ? "correct" : "incorrect";
@@ -169,10 +170,10 @@ choices.forEach((choice) => {
     // console.log(yesNo);
 
     if (yesNo === "correct") {
-      console.log("YEAH BOI!");
+      // console.log("YEAH BOI!");
       increment(CORRECT_BONUS);
     } else if (yesNo === "incorrect") {
-      console.log("WRONG!");
+      // console.log("WRONG!");
       // time = time - 5;
       decrement(DECREMENT_TIME);
       // document.appendChild(p)
@@ -198,12 +199,12 @@ choices.forEach((choice) => {
   });
 });
 // clearInterval(countdownTimer);
-
+// INSCREASES SCORE
 increment = (num) => {
   score += num;
   scoreText.innerText = score;
 };
-
+// DECREMENT_TIME
 decrement = (num) => {
   time -= num;
   timer.innerText = "Timer: " + -num + " seconds";
