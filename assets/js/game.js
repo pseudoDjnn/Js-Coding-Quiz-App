@@ -111,7 +111,10 @@ countdownTimer = () => {
       timer.innerText = "Game Over!";
       clearInterval(timeInterval);
 
-      return window.location.assign("./score.html");
+      // return window.location.assign("/score.html");
+      return window.location.assign(
+        "https://pseudodjnn.github.io/Js-Coding-Quiz-App/score.html"
+      );
       // startGame();
     }
   }, movementTime);
@@ -133,7 +136,11 @@ getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
     // SETTING LOCAL STORAGE TO COLLECT INSIDE OF SCORE.JS
     localStorage.setItem("recentScore", score);
-    return window.location.assign("./score.html");
+    // return window.location.assign("/score.html");
+
+    return window.location.assign(
+      "https://pseudodjnn.github.io/Js-Coding-Quiz-App/score.html"
+    );
   }
 
   questionCounter++;
