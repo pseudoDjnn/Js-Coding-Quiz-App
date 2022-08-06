@@ -41,7 +41,8 @@ saveHighScore = (event) => {
 
   // Save string with JSON
   localStorage.setItem("high-score", JSON.stringify(highScores));
-  window.location.assign("/index.html");
+  // window.location.assign("/index.html");
+  window.location.assign("https://pseudodjnn.github.io/Js-Coding-Quiz-App/");
 
   console.log(highScores);
 };
