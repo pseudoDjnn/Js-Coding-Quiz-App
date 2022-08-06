@@ -1,3 +1,14 @@
+/* inner div ATTRIBUTES for second HTML file */
+
+#countdown {
+  display: flex;
+  margin: 0.1rem 23rem;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  width: 95%;
+  font-size: 2.5rem;
+}
+
 .choice-container {
   display: flex;
   margin-bottom: 1rem;
@@ -22,4 +33,28 @@
 
 .choice-text {
   padding: 1.4rem;
+  width: 100%;
+}
+
+.correct {
+  background-color: #72cc50;
+}
+
+.incorrect {
+  background-color: #ff0000;
+}
+
+/* HUD AND SCORE */
+#hud {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hud-prefix {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.hud-main-text {
+  text-align: center;
 }
