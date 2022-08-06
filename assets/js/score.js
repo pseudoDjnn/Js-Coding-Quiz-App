@@ -41,7 +41,7 @@ saveHighScore = (event) => {
 
   // Save string with JSON
   localStorage.setItem("high-score", JSON.stringify(highScores));
-  window.location.assign("./leaderboards.html");
+  window.location.assign("/index.html");
 
   console.log(highScores);
 };
