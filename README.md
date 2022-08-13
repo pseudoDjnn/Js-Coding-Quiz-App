@@ -6,9 +6,9 @@ Create a fun quiz app to show case decrementing timer, click event number reduct
 
 ## Built With
 
--HTML
--CSS
--Javascript
+- HTML
+- CSS
+- Javascript
 
 # Website
 
